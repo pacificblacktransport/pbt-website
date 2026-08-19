@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Black Car in Los Angeles | Pacific Black Transport</title>
+  <meta name="description" content="Request prearranged black-car transportation in Los Angeles. Tell us where and when — we confirm availability and pricing, then your ride is set.">
+  <!-- TODO: replace with live domain when custom domain is set -->
+  <link rel="canonical" href="https://SITE_URL/ride/">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,300..900&family=Inter:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body class="accent-champagne">
+
+<!-- ======================= SHARED HEADER (duplicated on every page — keep in sync) ======================= -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../" class="wordmark" aria-label="Pacific Black Transport — home">
+      <span class="mark">PBT</span>
+      <span class="sub">Pacific Black Transport</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-item" href="./" aria-current="page">Ride</a>
+      <a class="nav-item" href="../vehicles/">Vehicles</a>
+      <a class="nav-item" href="../drive/">Drive</a>
+      <a class="nav-item" href="../partner/">Partner</a>
+      <a class="nav-item" href="../standards/">Standards</a>
+      <a class="btn btn-outline" href="./">Request a Ride</a>
+    </nav>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+  <a href="./" aria-current="page">Ride</a>
+  <a href="../vehicles/">Vehicles</a>
+  <a href="../drive/">Drive</a>
+  <a href="../partner/">Partner</a>
+  <a href="../standards/">Standards</a>
+  <a href="../contact/">Contact</a>
+  <a class="btn btn-solid" href="./">Request a Ride</a>
+</nav>
+<!-- ======================= /SHARED HEADER ======================= -->
+
+<main>
+
+  <!-- COMPACT HERO -->
+  <section class="hero compact">
+    <div class="bg-word" aria-hidden="true" data-speed="0.18">RIDE</div>
+    <div class="hero-media">
+      <!-- IMAGE DIRECTION: dark Pacific swell, champagne moonlight path, B&W long exposure, 21:9. -->
+      <img src="../assets/img/hero-ride.svg" alt="Moonlight over dark Pacific water" fetchpriority="high">
+    </div>
+    <div class="container">
+      <span class="eyebrow">Prearranged · Los Angeles</span>
+      <h1>Request a Ride</h1>
+      <p class="hero-sub">Tell us where and when. We confirm availability and pricing, then your ride is set.</p>
+    </div>
+  </section>
+
+  <!-- THE FORM -->
+  <section>
+    <div class="container">
+      <div class="form-panel">
+        <form data-pbt-form data-email-subject="PBT Ride Request" novalidate>
+          <!-- Web3Forms hidden fields -->
+          <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true">
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="pickup">Pickup location</label>
+              <input id="pickup" name="pickup_location" type="text" required autocomplete="street-address">
+              <p class="error-msg">Enter a pickup address.</p>
+            </div>
+            <div class="field">
+              <label for="destination">Destination</label>
+              <input id="destination" name="destination" type="text" required>
+              <p class="error-msg">Enter a destination.</p>
+            </div>
+            <div class="field">
+              <label for="date">Date</label>
+              <input id="date" name="date" type="date" required data-min-today>
+              <p class="error-msg">Choose a date (today or later).</p>
+            </div>
+            <div class="field">
+              <label for="time">Time</label>
+              <input id="time" name="time" type="time" required>
+              <p class="error-msg">Choose a pickup time.</p>
+            </div>
+
+            <div class="field full">
+              <label id="class-label">Vehicle class</label>
+              <div class="radio-cards" role="radiogroup" aria-labelledby="class-label">
+                <div class="radio-card">
+                  <input type="radio" id="rc-exec" name="vehicle_class" value="Executive" checked>
+                  <label for="rc-exec">
+                    <img src="../assets/img/cars/car1.png" alt="" loading="lazy">
+                    <span class="rc-name">Executive</span>
+                    <span class="rc-model">BMW 5 Series or similar</span>
+                  </label>
+                </div>
+                <div class="radio-card">
+                  <input type="radio" id="rc-first" name="vehicle_class" value="First Class">
+                  <label for="rc-first">
+                    <img src="../assets/img/cars/car2.png" alt="" loading="lazy">
+                    <span class="rc-name">First Class</span>
+                    <span class="rc-model">BMW 7 Series or similar</span>
+                  </label>
+                </div>
+                <div class="radio-card">
+                  <input type="radio" id="rc-esuv" name="vehicle_class" value="Executive SUV">
+                  <label for="rc-esuv">
+                    <img src="../assets/img/cars/car3.png" alt="" loading="lazy">
+                    <span class="rc-name">Executive SUV</span>
+                    <span class="rc-model">Chevrolet Suburban or similar</span>
+                  </label>
+                </div>
+                <div class="radio-card">
+                  <input type="radio" id="rc-fsuv" name="vehicle_class" value="First Class SUV">
+                  <label for="rc-fsuv">
+                    <img src="../assets/img/cars/car4.png" alt="" loading="lazy">
+                    <span class="rc-name">First Class SUV</span>
+                    <span class="rc-model">Cadillac Escalade or similar</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="passengers">Passengers</label>
+              <select id="passengers" name="passengers" required>
+                <option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option>
+                <option value="5">5</option><option value="6">6</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" required autocomplete="name">
+              <p class="error-msg">Enter your name.</p>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" required autocomplete="tel" pattern="[0-9+()\-\s\.]{7,}">
+              <p class="error-msg">Enter a valid phone number.</p>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email">
+              <p class="error-msg">Enter a valid email address.</p>
+            </div>
+            <div class="field full">
+              <label for="notes">Notes (optional)</label>
+              <textarea id="notes" name="notes" placeholder="Flight number, luggage, special requests"></textarea>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <button type="submit" class="btn btn-solid">Request This Ride</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+            <p class="privacy-line">Your information is used only to respond to your request and is never sold. <a href="../contact/">Questions?</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPECTATION-SETTING -->
+  <section class="alt">
+    <div class="container">
+      <div class="steps reveal">
+        <div class="step">
+          <span class="utility">Prearranged Only</span>
+          <p>Every trip is scheduled in advance.</p>
+        </div>
+        <div class="step">
+          <span class="utility">Personal Confirmation</span>
+          <p>A real person confirms your price and driver.</p>
+        </div>
+        <div class="step">
+          <span class="utility">All Classes on Request</span>
+          <p>Availability confirmed by PBT.</p>
+        </div>
+      </div>
+      <div style="margin-top:56px" class="stack">
+        <p class="small-print">Vehicle images are representative. Specific make and model are subject to availability.</p>
+        <p class="small-print">Pacific Black Transport operates under California charter-party carrier authority TCP0049330-P.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Sticky mobile CTA -->
+<div class="sticky-cta"><a class="btn btn-solid" href="#pickup">Request a Ride</a></div>
+
+<!-- ======================= SHARED FOOTER (duplicated on every page — keep in sync) ======================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="../" class="wordmark" aria-label="Pacific Black Transport — home">
+          <span class="mark">PBT</span>
+          <span class="sub">Pacific Black Transport</span>
+        </a>
+        <p style="margin-top:22px;font-size:14px">Prearranged black-car transportation in Los Angeles.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <span class="utility footer-heading">Site</span>
+        <a href="../">Home</a>
+        <a href="./">Request a Ride</a>
+        <a href="../vehicles/">Vehicles</a>
+        <a href="../drive/">Drive With PBT</a>
+      </nav>
+      <nav class="footer-links" aria-label="Footer secondary">
+        <span class="utility footer-heading">Company</span>
+        <a href="../partner/">Business &amp; Partnerships</a>
+        <a href="../standards/">Standards</a>
+        <a href="../contact/">Contact</a>
+        <a href="mailto:pacific.black.transport@gmail.com">pacific.black.transport@gmail.com</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>Pacific Black Transport Inc. · TCP0049330-P · Los Angeles, California</p>
+      <p>Vehicle images are representative. Specific make and model are subject to availability.</p>
+      <p>Your information is used only to respond to your request and is never sold.</p>
+      <p>© Pacific Black Transport Inc.</p>
+    </div>
+  </div>
+</footer>
+<!-- ======================= /SHARED FOOTER ======================= -->
+
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

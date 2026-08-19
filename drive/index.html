@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Driving Opportunities in Los Angeles | Drive With PBT</title>
+  <meta name="description" content="Drive with Pacific Black Transport — a licensed, professional black-car operation in Los Angeles. Apply to drive a PBT vehicle or your own.">
+  <!-- TODO: replace with live domain when custom domain is set -->
+  <link rel="canonical" href="https://SITE_URL/drive/">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,300..900&family=Inter:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body class="accent-blue">
+
+<!-- ======================= SHARED HEADER (duplicated on every page — keep in sync) ======================= -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../" class="wordmark" aria-label="Pacific Black Transport — home">
+      <span class="mark">PBT</span>
+      <span class="sub">Pacific Black Transport</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-item" href="../ride/">Ride</a>
+      <a class="nav-item" href="../vehicles/">Vehicles</a>
+      <a class="nav-item" href="./" aria-current="page">Drive</a>
+      <a class="nav-item" href="../partner/">Partner</a>
+      <a class="nav-item" href="../standards/">Standards</a>
+      <a class="btn btn-outline" href="../ride/">Request a Ride</a>
+    </nav>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+  <a href="../ride/">Ride</a>
+  <a href="../vehicles/">Vehicles</a>
+  <a href="./" aria-current="page">Drive</a>
+  <a href="../partner/">Partner</a>
+  <a href="../standards/">Standards</a>
+  <a href="../contact/">Contact</a>
+  <a class="btn btn-solid" href="../ride/">Request a Ride</a>
+</nav>
+<!-- ======================= /SHARED HEADER ======================= -->
+
+<main>
+
+  <section class="hero compact">
+    <div class="bg-word" aria-hidden="true" data-speed="0.18">DRIVE</div>
+    <div class="hero-media">
+      <!-- IMAGE DIRECTION: dark Pacific swell at dusk, cold blue moonlight path, B&W, 21:9. -->
+      <img src="../assets/img/hero-drive.svg" alt="Dark Pacific Ocean under night sky" fetchpriority="high">
+    </div>
+    <div class="container">
+      <span class="eyebrow">Careers on the Road</span>
+      <h1>Drive With PBT</h1>
+      <p class="hero-sub">A professional operation for professional drivers.</p>
+    </div>
+  </section>
+
+  <!-- WHY PBT -->
+  <section>
+    <div class="container">
+      <span class="eyebrow">Why PBT</span>
+      <div class="steps reveal" style="margin-top:36px">
+        <div class="step">
+          <span class="utility">Late-Model Premium Vehicles</span>
+          <p>Maintained, detailed, and ready for premium service.</p>
+        </div>
+        <div class="step">
+          <span class="utility">Licensed, Compliant Operation</span>
+          <p>A California charter-party carrier that keeps its paperwork in order.</p>
+        </div>
+        <div class="step">
+          <span class="utility">Clear Standards, Clear Process</span>
+          <p>You'll know what's expected and what happens next at every stage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATHWAYS -->
+  <section class="alt">
+    <div class="container">
+      <span class="eyebrow">Two Pathways</span>
+      <h2>Choose how you drive</h2>
+
+      <div class="tab-selector" role="tablist" aria-label="Driver pathways" style="margin-top:40px">
+        <button class="tab-btn" role="tab" id="tab-pbt" aria-controls="pbt-vehicle" aria-selected="true">
+          <span class="utility">Pathway A</span>
+          Drive a PBT Vehicle
+        </button>
+        <button class="tab-btn" role="tab" id="tab-own" aria-controls="own-vehicle" aria-selected="false">
+          <span class="utility">Pathway B</span>
+          Drive Your Own Vehicle
+        </button>
+      </div>
+
+      <!-- PATHWAY A -->
+      <div class="tab-panel active" id="pbt-vehicle" role="tabpanel" aria-labelledby="tab-pbt">
+        <p style="margin-bottom:28px">Our process: Apply → Qualification review → Interview → Documentation → Vehicle assignment → Onboarding → Start driving.</p>
+
+        <div class="form-panel">
+          <form data-pbt-form data-email-subject="PBT Driver Application — Company Vehicle" novalidate>
+            <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true">
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="a-name">Full name</label>
+                <input id="a-name" name="name" type="text" required autocomplete="name">
+                <p class="error-msg">Enter your name.</p>
+              </div>
+              <div class="field">
+                <label for="a-phone">Phone</label>
+                <input id="a-phone" name="phone" type="tel" required autocomplete="tel" pattern="[0-9+()\-\s\.]{7,}">
+                <p class="error-msg">Enter a valid phone number.</p>
+              </div>
+              <div class="field">
+                <label for="a-email">Email</label>
+                <input id="a-email" name="email" type="email" required autocomplete="email">
+                <p class="error-msg">Enter a valid email address.</p>
+              </div>
+              <div class="field">
+                <label for="a-city">City</label>
+                <input id="a-city" name="city" type="text" required autocomplete="address-level2">
+                <p class="error-msg">Enter your city.</p>
+              </div>
+              <div class="field">
+                <label for="a-license">CA driver's license status</label>
+                <select id="a-license" name="license_status" required>
+                  <option value="Valid CA license">Valid CA license</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="a-exp">Years of professional driving experience</label>
+                <select id="a-exp" name="experience_years" required>
+                  <option value="Less than 1">Less than 1</option>
+                  <option value="1–3">1–3</option>
+                  <option value="3–5">3–5</option>
+                  <option value="5–10">5–10</option>
+                  <option value="10+">10+</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="a-uber">Uber experience</label>
+                <select id="a-uber" name="uber_experience" required>
+                  <option value="No">No</option>
+                  <option value="Yes — under 1 year">Yes — under 1 year</option>
+                  <option value="Yes — 1–3 years">Yes — 1–3 years</option>
+                  <option value="Yes — 3+ years">Yes — 3+ years</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="a-lyft">Lyft experience</label>
+                <select id="a-lyft" name="lyft_experience" required>
+                  <option value="No">No</option>
+                  <option value="Yes — under 1 year">Yes — under 1 year</option>
+                  <option value="Yes — 1–3 years">Yes — 1–3 years</option>
+                  <option value="Yes — 3+ years">Yes — 3+ years</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="a-black">Black / premium platform experience</label>
+                <select id="a-black" name="premium_experience" required>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="a-eligible">Legally eligible to work in the U.S.?</label>
+                <select id="a-eligible" name="work_eligible" required>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label id="a-avail-label">Availability</label>
+                <div class="check-row" role="group" aria-labelledby="a-avail-label">
+                  <label><input type="checkbox" name="availability" value="Weekdays"> Weekdays</label>
+                  <label><input type="checkbox" name="availability" value="Weeknights"> Weeknights</label>
+                  <label><input type="checkbox" name="availability" value="Weekends"> Weekends</label>
+                </div>
+              </div>
+              <div class="field full">
+                <label for="a-schedule">Preferred schedule</label>
+                <input id="a-schedule" name="preferred_schedule" type="text" placeholder="e.g. evenings after 6pm">
+              </div>
+              <div class="field full">
+                <label for="a-notes">Anything else (optional)</label>
+                <textarea id="a-notes" name="notes"></textarea>
+              </div>
+            </div>
+
+            <div class="form-footer">
+              <button type="submit" class="btn btn-solid">Submit Application</button>
+              <p class="form-status" role="status" aria-live="polite"></p>
+              <p class="privacy-line">Your information is used only to respond to your request and is never sold. <a href="../contact/">Questions?</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- PATHWAY B -->
+      <div class="tab-panel" id="own-vehicle" role="tabpanel" aria-labelledby="tab-own">
+        <p style="margin-bottom:28px">Operating a personal vehicle under PBT is subject to regulatory, insurance, and platform requirements. Submitting tells us about you and your vehicle — we'll review eligibility and respond.</p>
+
+        <div class="form-panel">
+          <form data-pbt-form data-email-subject="PBT Driver Application — Own Vehicle" novalidate>
+            <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true">
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="b-name">Full name</label>
+                <input id="b-name" name="name" type="text" required autocomplete="name">
+                <p class="error-msg">Enter your name.</p>
+              </div>
+              <div class="field">
+                <label for="b-phone">Phone</label>
+                <input id="b-phone" name="phone" type="tel" required autocomplete="tel" pattern="[0-9+()\-\s\.]{7,}">
+                <p class="error-msg">Enter a valid phone number.</p>
+              </div>
+              <div class="field">
+                <label for="b-email">Email</label>
+                <input id="b-email" name="email" type="email" required autocomplete="email">
+                <p class="error-msg">Enter a valid email address.</p>
+              </div>
+              <div class="field">
+                <label for="b-city">City</label>
+                <input id="b-city" name="city" type="text" required autocomplete="address-level2">
+                <p class="error-msg">Enter your city.</p>
+              </div>
+              <div class="field">
+                <label for="b-license">CA driver's license status</label>
+                <select id="b-license" name="license_status" required>
+                  <option value="Valid CA license">Valid CA license</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="b-exp">Years of professional driving experience</label>
+                <select id="b-exp" name="experience_years" required>
+                  <option value="Less than 1">Less than 1</option>
+                  <option value="1–3">1–3</option>
+                  <option value="3–5">3–5</option>
+                  <option value="5–10">5–10</option>
+                  <option value="10+">10+</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="b-uber">Uber experience</label>
+                <select id="b-uber" name="uber_experience" required>
+                  <option value="No">No</option>
+                  <option value="Yes — under 1 year">Yes — under 1 year</option>
+                  <option value="Yes — 1–3 years">Yes — 1–3 years</option>
+                  <option value="Yes — 3+ years">Yes — 3+ years</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="b-lyft">Lyft experience</label>
+                <select id="b-lyft" name="lyft_experience" required>
+                  <option value="No">No</option>
+                  <option value="Yes — under 1 year">Yes — under 1 year</option>
+                  <option value="Yes — 1–3 years">Yes — 1–3 years</option>
+                  <option value="Yes — 3+ years">Yes — 3+ years</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="b-black">Black / premium platform experience</label>
+                <select id="b-black" name="premium_experience" required>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="b-eligible">Legally eligible to work in the U.S.?</label>
+                <select id="b-eligible" name="work_eligible" required>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label id="b-avail-label">Availability</label>
+                <div class="check-row" role="group" aria-labelledby="b-avail-label">
+                  <label><input type="checkbox" name="availability" value="Weekdays"> Weekdays</label>
+                  <label><input type="checkbox" name="availability" value="Weeknights"> Weeknights</label>
+                  <label><input type="checkbox" name="availability" value="Weekends"> Weekends</label>
+                </div>
+              </div>
+              <div class="field full">
+                <label for="b-schedule">Preferred schedule</label>
+                <input id="b-schedule" name="preferred_schedule" type="text" placeholder="e.g. evenings after 6pm">
+              </div>
+
+              <div class="field">
+                <label for="b-make">Vehicle make</label>
+                <input id="b-make" name="vehicle_make" type="text" required>
+                <p class="error-msg">Enter the vehicle make.</p>
+              </div>
+              <div class="field">
+                <label for="b-model">Model</label>
+                <input id="b-model" name="vehicle_model" type="text" required>
+                <p class="error-msg">Enter the vehicle model.</p>
+              </div>
+              <div class="field">
+                <label for="b-year">Year</label>
+                <input id="b-year" name="vehicle_year" type="number" inputmode="numeric" min="2000" max="2027" required>
+                <p class="error-msg">Enter the vehicle year.</p>
+              </div>
+              <div class="field">
+                <label for="b-ext">Exterior color</label>
+                <input id="b-ext" name="exterior_color" type="text" required>
+                <p class="error-msg">Enter the exterior color.</p>
+              </div>
+              <div class="field">
+                <label for="b-int">Interior color</label>
+                <input id="b-int" name="interior_color" type="text" required>
+                <p class="error-msg">Enter the interior color.</p>
+              </div>
+              <div class="field">
+                <label for="b-miles">Approximate mileage</label>
+                <input id="b-miles" name="approx_mileage" type="text" inputmode="numeric" required>
+                <p class="error-msg">Enter approximate mileage.</p>
+              </div>
+              <div class="field">
+                <label for="b-reg">Registration current?</label>
+                <select id="b-reg" name="registration_current" required>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="b-ins">Commercial or rideshare insurance status</label>
+                <input id="b-ins" name="insurance_status" type="text" placeholder="e.g. commercial policy active" required>
+                <p class="error-msg">Briefly describe your insurance status.</p>
+              </div>
+              <div class="field">
+                <label for="b-active">Currently active on Uber/Lyft?</label>
+                <select id="b-active" name="active_on_platforms" required>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="b-blkelig">Black/Premier eligible currently?</label>
+                <select id="b-blkelig" name="black_eligible" required>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                  <option value="Unsure">Unsure</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="b-notes">Anything else (optional)</label>
+                <textarea id="b-notes" name="notes"></textarea>
+              </div>
+            </div>
+
+            <div class="form-footer">
+              <button type="submit" class="btn btn-solid">Submit for Eligibility Review</button>
+              <p class="form-status" role="status" aria-live="polite"></p>
+              <p class="privacy-line">If your application advances, we'll request documentation and photos by email.</p>
+              <p class="privacy-line">Your information is used only to respond to your request and is never sold. <a href="../contact/">Questions?</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE LOOK FOR -->
+  <section>
+    <div class="container">
+      <span class="eyebrow">What We Look For</span>
+      <div class="steps reveal" style="margin-top:36px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+        <div class="step"><span class="utility">Clean Driving Record</span><p>Verified before any vehicle assignment.</p></div>
+        <div class="step"><span class="utility">Professional Presentation</span><p>You represent the standard on every trip.</p></div>
+        <div class="step"><span class="utility">Premium Service Mindset</span><p>Quiet, attentive, never performative.</p></div>
+        <div class="step"><span class="utility">Reliability</span><p>On time, every time, without reminders.</p></div>
+      </div>
+      <p style="margin-top:48px;font-size:15px">Compensation structure, schedule, and terms are discussed individually during the interview stage.</p>
+    </div>
+  </section>
+
+  <!-- VEHICLE PROGRAMS TEASER -->
+  <section class="alt">
+    <div class="container">
+      <a class="card reveal" href="../contact/?subject=Vehicle%20Program%20Inquiry" style="max-width:560px">
+        <span class="utility">Coming Soon</span>
+        <h3>Vehicle Programs</h3>
+        <p>Daily, weekly, and longer-term vehicle arrangements are in development. Interested? Send an inquiry.</p>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Sticky mobile CTA -->
+<div class="sticky-cta"><a class="btn btn-solid" href="#pbt-vehicle">Apply</a></div>
+
+<!-- ======================= SHARED FOOTER (duplicated on every page — keep in sync) ======================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="../" class="wordmark" aria-label="Pacific Black Transport — home">
+          <span class="mark">PBT</span>
+          <span class="sub">Pacific Black Transport</span>
+        </a>
+        <p style="margin-top:22px;font-size:14px">Prearranged black-car transportation in Los Angeles.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <span class="utility footer-heading">Site</span>
+        <a href="../">Home</a>
+        <a href="../ride/">Request a Ride</a>
+        <a href="../vehicles/">Vehicles</a>
+        <a href="./">Drive With PBT</a>
+      </nav>
+      <nav class="footer-links" aria-label="Footer secondary">
+        <span class="utility footer-heading">Company</span>
+        <a href="../partner/">Business &amp; Partnerships</a>
+        <a href="../standards/">Standards</a>
+        <a href="../contact/">Contact</a>
+        <a href="mailto:pacific.black.transport@gmail.com">pacific.black.transport@gmail.com</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p>Pacific Black Transport Inc. · TCP0049330-P · Los Angeles, California</p>
+      <p>Vehicle images are representative. Specific make and model are subject to availability.</p>
+      <p>Your information is used only to respond to your request and is never sold.</p>
+      <p>© Pacific Black Transport Inc.</p>
+    </div>
+  </div>
+</footer>
+<!-- ======================= /SHARED FOOTER ======================= -->
+
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>
