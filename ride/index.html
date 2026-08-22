@@ -48,12 +48,13 @@
 
 <main>
 
-  <!-- COMPACT HERO -->
+  <!-- COMPACT HERO — interactive canvas ocean (see assets/js/ocean.js).
+       data-moon sets the moon's vertical position (0–1). Move the pointer
+       or drag a finger over the hero: the water lifts and leaves a wake. -->
   <section class="hero compact">
     <div class="bg-word" aria-hidden="true" data-speed="0.18">RIDE</div>
     <div class="hero-media">
-      <!-- IMAGE DIRECTION: dark Pacific swell, champagne moonlight path, B&W long exposure, 21:9. -->
-      <img src="../assets/img/hero-ride.svg" alt="Moonlight over dark Pacific water" fetchpriority="high">
+      <canvas class="ocean-canvas" data-moon="0.34" aria-hidden="true"></canvas>
     </div>
     <div class="container">
       <span class="eyebrow">Prearranged · Los Angeles</span>
@@ -67,7 +68,6 @@
     <div class="container">
       <div class="form-panel">
         <form data-pbt-form data-email-subject="PBT Ride Request" novalidate>
-          <!-- Web3Forms hidden fields -->
           <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true">
 
           <div class="form-grid">
@@ -237,5 +237,6 @@
 <!-- ======================= /SHARED FOOTER ======================= -->
 
 <script src="../assets/js/main.js" defer></script>
+<script src="../assets/js/ocean.js" defer></script>
 </body>
 </html>
