@@ -837,15 +837,3 @@ body.accent-blue .steps .step p {
   margin-left: auto;
   margin-right: auto;
 }
-
-/* Hero: full-bleed edge to edge, minimal crop */
-.hero-media { inset: -6% 0; }
-.hero-media img {
-  object-fit: cover;
-  object-position: center 38%;   /* was 62% */
-}
-
-/* Shorter heroes = crop window closer to the artwork's wide shape,
-   so moon and waves both stay in frame */
-.hero { min-height: 78vh; }
-.hero.compact { min-height: 62vh; }
