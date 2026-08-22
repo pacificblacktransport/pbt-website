@@ -3,6 +3,8 @@
    Cinematic monochrome luxury. Dark theme only.
    All colors come from the tokens below — no hard-coded hex elsewhere.
    v2: adds .email-fallback panel styles (mailto fallback, section 10).
+   v3: adds h1.h1-long — smaller clamp for long single-word headlines
+       (fixes "TRANSPORTATION" overflowing the viewport on /partner/).
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -76,6 +78,15 @@ h1 {
   letter-spacing: -.015em;
   text-transform: uppercase;
 }
+
+/* Long-headline variant — for H1s containing a word longer than ~10 letters
+   (e.g. "TRANSPORTATION" on /partner/). The default clamp is sized for short
+   hero words and overflows the viewport with long single words. Add
+   class="h1-long" to the H1 element. */
+h1.h1-long {
+  font-size: clamp(2.2rem, 6.4vw, 5rem);
+}
+
 h2 {
   font-weight: 800;
   font-stretch: 108%;
