@@ -68,20 +68,23 @@
     </div>
   </section>
 
-  <!-- WHY PBT -->
+  <!-- WHY PBT — thin-line icons in the page accent -->
   <section>
     <div class="container">
       <span class="eyebrow">Why PBT</span>
       <div class="steps reveal" style="margin-top:36px">
         <div class="step">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16v3m16-3v3M3 12l1.7-4.6A2 2 0 0 1 6.6 6h10.8a2 2 0 0 1 1.9 1.4L21 12v4H3v-4z"/><path d="M6.5 12.5h.01M17.5 12.5h.01"/></svg>
           <span class="utility">Late-Model Premium Vehicles</span>
           <p>Maintained, detailed, and ready for premium service.</p>
         </div>
         <div class="step">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l7 3V12c0 4-3 6.6-7 8.1-4-1.5-7-4.1-7-8.1V6.5l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
           <span class="utility">Licensed, Compliant Operation</span>
           <p>A California charter-party carrier that keeps its paperwork in order.</p>
         </div>
         <div class="step">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5z"/><path d="M8.5 9.2l1.2 1.2 2.3-2.4M8.5 14.2l1.2 1.2 2.3-2.4M15 9.5h.5M15 14.5h.5"/></svg>
           <span class="utility">Clear Standards, Clear Process</span>
           <p>You'll know what's expected and what happens next at every stage.</p>
         </div>
@@ -108,9 +111,19 @@
 
       <!-- PATHWAY A -->
       <div class="tab-panel active" id="pbt-vehicle" role="tabpanel" aria-labelledby="tab-pbt">
-        <p style="margin-bottom:28px">Our process: Apply → Qualification review → Interview → Documentation → Vehicle assignment → Onboarding → Start driving.</p>
 
-        <div class="form-panel">
+        <!-- The process, as a numbered strip (order carries real meaning here) -->
+        <div class="process-strip reveal">
+          <div class="p-step"><span class="p-num">01</span><span class="p-name">Apply</span></div>
+          <div class="p-step"><span class="p-num">02</span><span class="p-name">Qualification review</span></div>
+          <div class="p-step"><span class="p-num">03</span><span class="p-name">Interview</span></div>
+          <div class="p-step"><span class="p-num">04</span><span class="p-name">Documentation</span></div>
+          <div class="p-step"><span class="p-num">05</span><span class="p-name">Vehicle assignment</span></div>
+          <div class="p-step"><span class="p-num">06</span><span class="p-name">Onboarding</span></div>
+          <div class="p-step"><span class="p-num">07</span><span class="p-name">Start driving</span></div>
+        </div>
+
+        <div class="form-panel" style="margin-top:40px">
           <form data-pbt-form data-email-subject="PBT Driver Application — Company Vehicle" novalidate>
             <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true">
 
@@ -377,22 +390,63 @@
     </div>
   </section>
 
-  <!-- WHAT WE LOOK FOR -->
+  <!-- WHAT WE LOOK FOR — thin-line icons in the page accent -->
   <section>
     <div class="container">
       <span class="eyebrow">What We Look For</span>
       <div class="steps reveal" style="margin-top:36px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-        <div class="step"><span class="utility">Clean Driving Record</span><p>Verified before any vehicle assignment.</p></div>
-        <div class="step"><span class="utility">Professional Presentation</span><p>You represent the standard on every trip.</p></div>
-        <div class="step"><span class="utility">Premium Service Mindset</span><p>Quiet, attentive, never performative.</p></div>
-        <div class="step"><span class="utility">Reliability</span><p>On time, every time, without reminders.</p></div>
+        <div class="step">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 14.2l1.7 1.7 3.3-3.4"/></svg>
+          <span class="utility">Clean Driving Record</span><p>Verified before any vehicle assignment.</p>
+        </div>
+        <div class="step">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.5 3.8-5 7-5s6 1.5 7 5"/></svg>
+          <span class="utility">Professional Presentation</span><p>You represent the standard on every trip.</p>
+        </div>
+        <div class="step">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10l4 5-9 11L3 9l4-5z"/><path d="M3 9h18"/></svg>
+          <span class="utility">Premium Service Mindset</span><p>Quiet, attentive, never performative.</p>
+        </div>
+        <div class="step">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+          <span class="utility">Reliability</span><p>On time, every time, without reminders.</p>
+        </div>
       </div>
       <p style="margin-top:48px;font-size:15px">Compensation structure, schedule, and terms are discussed individually during the interview stage.</p>
     </div>
   </section>
 
-  <!-- VEHICLE PROGRAMS TEASER -->
+  <!-- DRIVER FAQ — answers the questions applicants actually have -->
   <section class="alt">
+    <div class="container">
+      <span class="eyebrow">Common Questions</span>
+      <dl class="def-list reveal" style="margin-top:36px">
+        <div>
+          <dt>Do I need my own vehicle?</dt>
+          <dd>No. Pathway A places qualified drivers in PBT vehicles. If you already have an appropriate vehicle, Pathway B is an eligibility review for operating it under PBT.</dd>
+        </div>
+        <div>
+          <dt>What kind of work is it?</dt>
+          <dd>Premium prearranged black-car service. PBT operates on Uber Black and Lyft Black — professional trips for passengers who expect a higher standard.</dd>
+        </div>
+        <div>
+          <dt>What will I drive?</dt>
+          <dd>Late-model premium vehicles, maintained and detailed. Your specific vehicle is confirmed at the assignment stage.</dd>
+        </div>
+        <div>
+          <dt>How is compensation set?</dt>
+          <dd>Compensation structure, schedule, and terms are discussed individually during the interview stage — clearly and in person, before any commitment.</dd>
+        </div>
+        <div>
+          <dt>How long does the process take?</dt>
+          <dd>Every application is reviewed personally. Qualified applicants typically hear from us within a few business days and move through the steps quickly.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- VEHICLE PROGRAMS TEASER -->
+  <section>
     <div class="container">
       <a class="card reveal" href="../contact/?subject=Vehicle%20Program%20Inquiry" style="max-width:560px">
         <span class="utility">Coming Soon</span>
