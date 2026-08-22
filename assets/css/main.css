@@ -2,6 +2,7 @@
    PACIFIC BLACK TRANSPORT — main.css
    Cinematic monochrome luxury. Dark theme only.
    All colors come from the tokens below — no hard-coded hex elsewhere.
+   v2: adds .email-fallback panel styles (mailto fallback, section 10).
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -450,6 +451,32 @@ section.alt { background: var(--charcoal); }
 
 .form-status { display: none; margin-top: 16px; font-size: 14px; color: var(--silver); }
 .form-status.visible { display: block; }
+
+/* Email fallback panel — injected by main.js when no mail app opens.
+   Offers "Open in Gmail" (browser compose) + "Copy message". */
+.email-fallback {
+  margin-top: 20px;
+  padding: 24px;
+  background: var(--graphite);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+.email-fallback[hidden] { display: none; }
+.email-fallback-lead {
+  color: var(--white);
+  font-size: 15px;
+  margin: 0 0 16px;
+  max-width: none;
+}
+.email-fallback-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.email-fallback-actions .btn { flex: 1 1 180px; }
+.email-fallback-small {
+  color: var(--silver);
+  font-size: 12.5px;
+  margin: 16px 0 0;
+  max-width: none;
+  overflow-wrap: anywhere;   /* long gmail address wraps cleanly on small phones */
+}
 
 .confirmation-panel {
   display: none;
