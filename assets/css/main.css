@@ -713,3 +713,9 @@ body:not([class*="accent-"]) .footer-links
    -------------------------------------------------------------------------- */
 .page-404 { min-height: 80vh; display: flex; align-items: center; text-align: center; }
 .page-404 .container { display: grid; gap: 24px; justify-items: center; }
+
+/* /partner/: taller hero so the 3-line headline sits lower, with
+   breathing room above — content is bottom-anchored via flex-end. */
+body.accent-emerald .hero.compact {
+  min-height: 86vh;
+}
