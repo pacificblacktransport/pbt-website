@@ -772,3 +772,55 @@ body.accent-emerald .hero.compact {
   stroke-linejoin: round;
   opacity: .9;
 }
+
+/* ============ CONSOLIDATED ADDITIONS (icons + card fixes) ============ */
+
+/* Tag-grid icons (partner page) */
+.tag-grid li { display: flex; align-items: center; gap: 14px; }
+.tag-icon {
+  flex: 0 0 auto;
+  width: 22px; height: 22px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round; stroke-linejoin: round;
+  opacity: .85;
+}
+
+/* Step icons (drive page: Why PBT / What We Look For) */
+.step-icon {
+  display: block;
+  width: 26px; height: 26px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.4;
+  stroke-linecap: round; stroke-linejoin: round;
+  opacity: .85;
+  margin-bottom: 14px;
+}
+.step:hover .step-icon, .tag-grid li:hover .tag-icon { opacity: 1; }
+
+/* Numbered process strip (drive page, Pathway A) */
+.process-strip {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  margin-top: 36px;
+}
+.process-strip .p-step { border-top: 1px solid var(--line); padding-top: 16px; }
+.process-strip .p-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13px; letter-spacing: .12em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.process-strip .p-name { font-size: 13px; color: var(--white); }
+
+/* Ride form: 4 equal vehicle cards, full width, equal heights */
+@media (min-width: 760px) { .radio-cards { grid-template-columns: repeat(4, 1fr); } }
+.radio-card { display: flex; }
+.radio-card label { display: flex; flex-direction: column; width: 100%; }
+.radio-card .rc-model { margin-top: auto; padding-top: 3px; }
+
+/* Vehicles page: photo always in the wider column — equal image sizes */
+@media (min-width: 900px) { .class-section.flip { grid-template-columns: 1fr 1.15fr; } }
