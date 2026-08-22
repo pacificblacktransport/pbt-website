@@ -842,7 +842,7 @@ body.accent-blue .steps .step p {
 .hero-media { inset: -6% 0; }
 .hero-media img {
   object-fit: cover;
-  object-position: center 62%;
+  object-position: center 48%;   /* was 62% */
 }
 
 /* Shorter heroes = crop window closer to the artwork's wide shape,
