@@ -366,23 +366,5 @@
      If this line is missing, page content stays invisible.
 ========================================================== -->
 <script src="assets/js/main.js" defer></script>
-
-<!-- =========================================================
-     SCRIPT 2 — call button only (appear after 10s, hide on scroll).
-     Self-contained: if it fails it cannot break Script 1.
-========================================================== -->
-<script>
-(function () {
-  var fab = document.querySelector(".call-fab");
-  if (!fab) return;
-  setTimeout(function () { fab.classList.add("fab-ready"); }, 10000);
-  var t = null;
-  window.addEventListener("scroll", function () {
-    fab.classList.add("fab-hidden");
-    clearTimeout(t);
-    t = setTimeout(function () { fab.classList.remove("fab-hidden"); }, 600);
-  }, { passive: true });
-})();
-</script>
 </body>
 </html>
