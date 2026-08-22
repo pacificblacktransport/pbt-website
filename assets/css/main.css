@@ -838,8 +838,11 @@ body.accent-blue .steps .step p {
   margin-right: auto;
 }
 
-/* Hero artwork: anchor the crop lower in the frame so the moon
-   always stays fully inside the visible area on every page. */
+/* Hero artwork: show the entire scene — moon and waves — uncropped */
 .hero-media img {
-  object-position: center 15%;
+  object-fit: contain;
+  object-position: center center;
+}
+.hero-media {
+  inset: 0;              /* no bleed needed when nothing is cropped */
 }
