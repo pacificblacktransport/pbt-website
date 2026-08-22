@@ -864,3 +864,38 @@ body.accent-blue .steps .step p {
 .card-centered { text-align: center; }
 .card-centered .card-icon { margin-left: auto; margin-right: auto; }
 .card-centered p { margin-left: auto; margin-right: auto; }
+
+.call-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 95;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 20px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--charcoal);
+  color: var(--white);
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  box-shadow: 0 10px 30px rgba(0,0,0,.55);
+  /* hidden by default; JS adds .visible */
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity .35s var(--ease), transform .35s var(--ease), border-color .2s var(--ease);
+}
+.call-fab.visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.call-fab:hover { border-color: #34C759; }
+
+/* sits above the sticky bar on ride/ and drive/ */
+@media (max-width: 760px) {
+  .call-fab { bottom: calc(78px + env(safe-area-inset-bottom)); }
+}
