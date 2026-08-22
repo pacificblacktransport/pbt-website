@@ -3,8 +3,12 @@
    Cinematic monochrome luxury. Dark theme only.
    All colors come from the tokens below — no hard-coded hex elsewhere.
    v2: adds .email-fallback panel styles (mailto fallback, section 10).
-   v3: adds h1.h1-long — smaller clamp for long single-word headlines
-       (fixes "TRANSPORTATION" overflowing the viewport on /partner/).
+   v3: adds h1.h1-long — smaller clamp for long single-word headlines.
+   v4: CSS-only fixes, no HTML edits needed:
+       · /partner/ hero headline auto-shrinks (body.accent-emerald) so
+         "TRANSPORTATION" no longer overflows the viewport.
+       · Nav, mobile menu, and footer link order forced to
+         Ride · Drive · Partner · Vehicles · Standards via flex/grid order.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -79,11 +83,19 @@ h1 {
   text-transform: uppercase;
 }
 
-/* Long-headline variant — for H1s containing a word longer than ~10 letters
-   (e.g. "TRANSPORTATION" on /partner/). The default clamp is sized for short
-   hero words and overflows the viewport with long single words. Add
-   class="h1-long" to the H1 element. */
+/* Long-headline variant — for H1s containing a word longer than ~10 letters.
+   The default clamp is sized for short hero words and overflows the viewport
+   with long single words. Add class="h1-long" to any such H1. */
 h1.h1-long {
+  font-size: clamp(2.2rem, 6.4vw, 5rem);
+}
+
+/* v4 AUTO-FIX: /partner/ hero says "TRANSPORTATION CAPACITY FOR YOUR
+   BUSINESS" — 14 uppercase stretched letters overflow at the default size.
+   The partner page already carries body.accent-emerald, so the fix applies
+   automatically with no HTML change. Remove this rule if the /partner/
+   headline is ever shortened (e.g. "Capacity for Your Business"). */
+body.accent-emerald .hero h1 {
   font-size: clamp(2.2rem, 6.4vw, 5rem);
 }
 
@@ -191,6 +203,18 @@ section.alt { background: var(--charcoal); }
 .nav-links a.nav-item:hover { color: var(--white); }
 .nav-links a.nav-item[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
 
+/* v4 NAV ORDER — Ride · Drive · Partner · Vehicles · Standards.
+   Reorders visually via flex `order`, no HTML edits required.
+   The CTA button (.btn, also linking to /ride/) is pushed last.
+   NOTE: this is a visual reorder only — DOM/tab order is unchanged.
+   For a permanent fix, reorder the links in the HTML and delete this block. */
+.nav-links a.nav-item[href*="ride"]      { order: 1; }
+.nav-links a.nav-item[href*="drive"]     { order: 2; }
+.nav-links a.nav-item[href*="partner"]   { order: 3; }
+.nav-links a.nav-item[href*="vehicle"]   { order: 4; }
+.nav-links a.nav-item[href*="standards"] { order: 5; }
+.nav-links .btn { order: 10; }
+
 @media (min-width: 960px) {
   .nav-links { display: flex; }
   .menu-toggle { display: none; }
@@ -240,6 +264,16 @@ section.alt { background: var(--charcoal); }
 }
 .mobile-menu a[aria-current="page"] { color: var(--accent); }
 .mobile-menu .btn { font-family: var(--font-body); margin-top: 12px; }
+
+/* v4 MOBILE MENU ORDER — same order as desktop nav; Home (if present)
+   stays first (order 0), CTA button stays last. */
+.mobile-menu a[href*="ride"]:not(.btn)  { order: 1; }
+.mobile-menu a[href*="drive"]           { order: 2; }
+.mobile-menu a[href*="partner"]         { order: 3; }
+.mobile-menu a[href*="vehicle"]         { order: 4; }
+.mobile-menu a[href*="standards"]       { order: 5; }
+.mobile-menu a[href*="contact"]         { order: 6; }
+.mobile-menu .btn                       { order: 10; }
 
 /* --------------------------------------------------------------------------
    6. HERO
@@ -550,6 +584,16 @@ section.alt { background: var(--charcoal); }
 .footer-links { display: grid; gap: 12px; }
 .footer-links a { font-size: 13px; color: var(--silver); transition: color .2s var(--ease); }
 .footer-links a:hover { color: var(--white); }
+
+/* v4 FOOTER ORDER — Home stays first (order 0), then
+   Ride · Drive · Partner · Vehicles · Standards · Contact. */
+.footer-links a[href*="ride"]      { order: 1; }
+.footer-links a[href*="drive"]     { order: 2; }
+.footer-links a[href*="partner"]   { order: 3; }
+.footer-links a[href*="vehicle"]   { order: 4; }
+.footer-links a[href*="standards"] { order: 5; }
+.footer-links a[href*="contact"]   { order: 6; }
+
 .footer-heading { margin-bottom: 18px; display: block; }
 .footer-legal { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); display: grid; gap: 10px; }
 .footer-legal p { font-size: 12px; }
