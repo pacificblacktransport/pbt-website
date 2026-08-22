@@ -131,6 +131,7 @@
     "name": "Pacific Black Transport Inc.",
     "url": "https://pacificblacktransport.com/",
     "email": "pacific.black.transport@gmail.com",
+    "telephone": "+1-747-777-3943",
     "areaServed": "Los Angeles, CA",
     "description": "Licensed California charter-party carrier (CPUC TCP0049330-P) providing prearranged black-car transportation in Los Angeles."
   }
@@ -163,6 +164,7 @@
   <a href="partner/">Partner</a>
   <a href="standards/">Standards</a>
   <a href="contact/">Contact</a>
+  <a href="tel:+17477773943">(747) 777-3943</a>
   <a class="btn btn-solid" href="ride/">Request a Ride</a>
 </nav>
 <!-- ======================= /SHARED HEADER ======================= -->
@@ -174,8 +176,7 @@
     <div class="bg-word" aria-hidden="true" data-speed="0.18">PACIFIC</div>
     <div class="hero-media">
       <!-- IMAGE DIRECTION: Pacific Ocean at night, black & white long exposure —
-           silk-smooth water, moonlight path on the swell, deep blacks, 21:9 crop.
-           Replace this animated SVG with the final graded photo (WebP/AVIF + srcset). -->
+           silk-smooth water, moonlight path on the swell, deep blacks, 21:9 crop. -->
       <img src="assets/img/hero-home.svg" alt="The Pacific Ocean at night, moonlight on dark water" fetchpriority="high">
     </div>
     <div class="container">
@@ -239,22 +240,18 @@
       <h2>Choose your experience</h2>
       <div class="card-row cols-4 reveal" style="margin-top:40px">
         <a class="card vehicle-card" href="vehicles/">
-          <!-- IMAGE DIRECTION: black flagship SUV, architectural glass entrance, 16:10 -->
           <img src="assets/img/cars/car4.png" alt="First Class SUV" loading="lazy">
           <div class="vc-body"><h3>First Class SUV</h3><p class="model">Cadillac Escalade or similar</p></div>
         </a>
         <a class="card vehicle-card" href="vehicles/">
-          <!-- IMAGE DIRECTION: black flagship sedan, low-key lighting, 16:10 -->
           <img src="assets/img/cars/car2.png" alt="First Class sedan" loading="lazy">
           <div class="vc-body"><h3>First Class</h3><p class="model">BMW 7 Series or similar</p></div>
         </a>
         <a class="card vehicle-card" href="vehicles/">
-          <!-- IMAGE DIRECTION: black full-size SUV, parking-structure setting, 16:10 -->
           <img src="assets/img/cars/car3.png" alt="Executive SUV" loading="lazy">
           <div class="vc-body"><h3>Executive SUV</h3><p class="model">Chevrolet Suburban or similar</p></div>
         </a>
         <a class="card vehicle-card" href="vehicles/">
-          <!-- IMAGE DIRECTION: black executive sedan, studio lighting on black paint, 16:10 -->
           <img src="assets/img/cars/car1.png" alt="Executive class sedan" loading="lazy">
           <div class="vc-body"><h3>Executive</h3><p class="model">BMW 5 Series or similar</p></div>
         </a>
@@ -270,21 +267,18 @@
       <div class="steps reveal" style="margin-top:44px">
 
         <div class="step step-centered">
-          <!-- Pencil on a form: making the request -->
           <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h9l5 5v11H5z"/><path d="M14 4v5h5"/><path d="M8.5 15.6l4.4-4.4 1.9 1.9-4.4 4.4-2.4.5z"/></svg>
           <span class="utility">Request</span>
           <p>Tell us where, when, and which vehicle class.</p>
         </div>
 
         <div class="step step-centered">
-          <!-- Check in a circle: personal confirmation -->
           <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.4 12.3l2.5 2.5 4.7-5"/></svg>
           <span class="utility">We Confirm</span>
           <p>A real person confirms availability and pricing.</p>
         </div>
 
         <div class="step step-centered">
-          <!-- Pin with a car: the driver arrives -->
           <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6.5-5.6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15.4 12 21 12 21z"/><path d="M9 12h6v-1.8l-.7-1.6a1 1 0 0 0-.9-.6h-2.8a1 1 0 0 0-.9.6L9 10.2z"/></svg>
           <span class="utility">Your Driver Arrives</span>
           <p>On time, in a premium vehicle, ready.</p>
@@ -344,6 +338,7 @@
         <a href="partner/">Business &amp; Partnerships</a>
         <a href="standards/">Standards</a>
         <a href="contact/">Contact</a>
+        <a href="tel:+17477773943">(747) 777-3943</a>
         <a href="mailto:pacific.black.transport@gmail.com">pacific.black.transport@gmail.com</a>
       </nav>
     </div>
@@ -357,11 +352,30 @@
 </footer>
 <!-- ======================= /SHARED FOOTER ======================= -->
 
+<!-- FLOATING CALL BUTTON -->
 <a class="call-fab" href="tel:+17477773943" aria-label="Call Pacific Black Transport">
   <svg class="call-fab-icon" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M7.6 4.2h-2A1.6 1.6 0 0 0 4 5.9C4 13.7 10.3 20 18.1 20a1.6 1.6 0 0 0 1.7-1.6v-2a1.1 1.1 0 0 0-.9-1.1l-3-.6a1.1 1.1 0 0 0-1.1.5l-.8 1.2a12.4 12.4 0 0 1-5.4-5.4l1.2-.8a1.1 1.1 0 0 0 .5-1.1l-.6-3a1.1 1.1 0 0 0-1.1-.9z"/>
   </svg>
   <span>Call</span>
 </a>
+
+<!-- SITE SCRIPT — required: reveals, mobile menu, forms, parallax -->
+<script src="assets/js/main.js" defer></script>
+
+<!-- Call button: hide while scrolling, return when it stops.
+     Self-contained so it can never break the main script. -->
+<script>
+(function () {
+  var fab = document.querySelector(".call-fab");
+  if (!fab) return;
+  var t = null;
+  window.addEventListener("scroll", function () {
+    fab.classList.add("fab-hidden");
+    clearTimeout(t);
+    t = setTimeout(function () { fab.classList.remove("fab-hidden"); }, 600);
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
