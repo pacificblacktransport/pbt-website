@@ -874,43 +874,16 @@ body.accent-blue .steps .step p {
   align-items: center;
   gap: 10px;
   padding: 16px 26px;
-  border-radius: 999px;                 /* full pill; use 12px for soft rectangle */
-  border: none;
+  border-radius: 999px;
   background: #34C759;
   color: #06210E;
   font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: .14em;
-  box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 0 rgba(52,199,89,.5);
-  opacity: 0;
-  transform: translateY(16px);
-  pointer-events: none;
-  transition: opacity .35s var(--ease), transform .35s var(--ease), background .2s var(--ease);
+  box-shadow: 0 12px 34px rgba(0,0,0,.5);
 }
-.call-fab.visible { opacity: 1; transform: none; pointer-events: auto; }
-.call-fab:hover { background: #2FB350; }
-
-.call-fab-icon {
-  width: 20px; height: 20px;
-  fill: currentColor;
-  flex: 0 0 auto;
-}
-
-/* soft outward pulse — reads as "reachable" */
-@media (prefers-reduced-motion: no-preference) {
-  .call-fab.visible { animation: fabPulse 2.6s ease-out infinite; }
-  @keyframes fabPulse {
-    0%   { box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 0 rgba(52,199,89,.5); }
-    70%  { box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 16px rgba(52,199,89,0); }
-    100% { box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 0 rgba(52,199,89,0); }
-  }
-}
-
+.call-fab-icon { width: 20px; height: 20px; fill: currentColor; }
 @media (max-width: 760px) {
-  .call-fab {
-    right: 20px;
-    bottom: calc(92px + env(safe-area-inset-bottom));  /* clears the sticky bar */
-    padding: 15px 22px;
-  }
+  .call-fab { right: 20px; bottom: calc(92px + env(safe-area-inset-bottom)); }
 }
