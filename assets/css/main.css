@@ -824,3 +824,16 @@ body.accent-emerald .hero.compact {
 
 /* Vehicles page: photo always in the wider column — equal image sizes */
 @media (min-width: 900px) { .class-section.flip { grid-template-columns: 1fr 1.15fr; } }
+
+/* Drive page: center the icon + label + text in each step */
+body.accent-blue .steps .step {
+  text-align: center;
+}
+body.accent-blue .steps .step .step-icon {
+  margin-left: auto;
+  margin-right: auto;
+}
+body.accent-blue .steps .step p {
+  margin-left: auto;
+  margin-right: auto;
+}
