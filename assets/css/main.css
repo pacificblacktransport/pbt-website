@@ -750,3 +750,12 @@ body.accent-emerald .hero.compact {
 @media (min-width: 900px) {
   .class-section.flip { grid-template-columns: 1fr 1.15fr; }
 }
+
+/* Ride form vehicle-class cards: 4 equal columns spanning the full
+   form width (aligned with the Date/Time columns above), equal heights. */
+@media (min-width: 760px) {
+  .radio-cards { grid-template-columns: repeat(4, 1fr); }
+}
+.radio-card { display: flex; }
+.radio-card label { display: flex; flex-direction: column; width: 100%; }
+.radio-card .rc-model { margin-top: auto; padding-top: 3px; }
