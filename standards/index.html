@@ -46,8 +46,15 @@
 
 <main>
 
-  <section class="hero compact" style="min-height:44vh">
+  <!-- HERO — now has the ocean artwork like every other page.
+       NOTE: there is no hero-standards.svg in assets yet, so this reuses
+       hero-partner.svg. Swap the filename if you generate a dedicated one. -->
+  <section class="hero compact">
     <div class="bg-word" aria-hidden="true" data-speed="0.18">STANDARDS</div>
+    <div class="hero-media">
+      <!-- IMAGE DIRECTION: calm dark Pacific, platinum moonlight path, B&W long exposure, 21:9. -->
+      <img src="../assets/img/hero-partner.svg" alt="Moonlight over dark Pacific water" fetchpriority="high">
+    </div>
     <div class="container">
       <span class="eyebrow">The Trust Page</span>
       <h1>Standards</h1>
@@ -55,7 +62,8 @@
     </div>
   </section>
 
-  <!-- COMPANY IDENTITY -->
+  <!-- COMPANY IDENTITY — stays a definition list: this is reference data,
+       and a table reads more credible here than decorated cards. -->
   <section class="alt">
     <div class="container">
       <span class="eyebrow">Company Identity</span>
@@ -68,28 +76,37 @@
     </div>
   </section>
 
-  <!-- OPERATING STANDARDS -->
+  <!-- OPERATING STANDARDS — now four centered icon cards -->
   <section>
     <div class="container">
       <span class="eyebrow">Our Operating Standards</span>
-      <dl class="def-list reveal" style="margin-top:36px">
-        <div>
-          <dt>Driver standards</dt>
-          <dd>Drivers are screened before they represent PBT, held to professional conduct on every trip, and bring premium-service experience to the work.</dd>
+      <div class="steps reveal" style="margin-top:44px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+
+        <div class="step step-centered">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.5 3.8-5 7-5s6 1.5 7 5"/></svg>
+          <span class="utility">Driver Standards</span>
+          <p>Drivers are screened before they represent PBT, held to professional conduct on every trip, and bring premium-service experience to the work.</p>
         </div>
-        <div>
-          <dt>Vehicle standards</dt>
-          <dd>Late-model premium vehicles, maintained and detailed. A PBT vehicle is ready before it leaves.</dd>
+
+        <div class="step step-centered">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16v3m16-3v3M3 12l1.7-4.6A2 2 0 0 1 6.6 6h10.8a2 2 0 0 1 1.9 1.4L21 12v4H3v-4z"/><path d="M6.5 12.5h.01M17.5 12.5h.01"/></svg>
+          <span class="utility">Vehicle Standards</span>
+          <p>Late-model premium vehicles, maintained and detailed. A PBT vehicle is ready before it leaves.</p>
         </div>
-        <div>
-          <dt>Trip standards</dt>
-          <dd>Every trip is prearranged, confirmed personally, and executed professionally — no ambiguity about who, when, or where.</dd>
+
+        <div class="step step-centered">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M6 8.2v4.3a3.5 3.5 0 0 0 3.5 3.5h5"/></svg>
+          <span class="utility">Trip Standards</span>
+          <p>Every trip is prearranged, confirmed personally, and executed professionally — no ambiguity about who, when, or where.</p>
         </div>
-        <div>
-          <dt>Safety philosophy</dt>
-          <dd>Compliance-first: licensed operating authority, commercial insurance, and adherence to platform and airport requirements. The paperwork is part of the service.</dd>
+
+        <div class="step step-centered">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l7 3V12c0 4-3 6.6-7 8.1-4-1.5-7-4.1-7-8.1V6.5l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span class="utility">Safety Philosophy</span>
+          <p>Compliance-first: licensed operating authority, commercial insurance, and adherence to platform and airport requirements. The paperwork is part of the service.</p>
         </div>
-      </dl>
+
+      </div>
     </div>
   </section>
 
