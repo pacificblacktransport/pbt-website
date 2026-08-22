@@ -4,11 +4,12 @@
    All colors come from the tokens below — no hard-coded hex elsewhere.
    v2: adds .email-fallback panel styles (mailto fallback, section 10).
    v3: adds h1.h1-long — smaller clamp for long single-word headlines.
-   v4: CSS-only fixes, no HTML edits needed:
-       · /partner/ hero headline auto-shrinks (body.accent-emerald) so
-         "TRANSPORTATION" no longer overflows the viewport.
-       · Nav, mobile menu, and footer link order forced to
-         Ride · Drive · Partner · Vehicles · Standards via flex/grid order.
+   v4: CSS-only fixes: /partner/ headline auto-shrink; nav/footer order
+       forced to Ride · Drive · Partner · Vehicles · Standards.
+   v5: FIX — the current page's own nav link was jumping to first position
+       (its href doesn't match the order selectors on its own page, so it
+       fell back to order 0). Added [aria-current="page"] rules keyed on
+       the page's body accent class so the active link keeps its slot.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -90,11 +91,10 @@ h1.h1-long {
   font-size: clamp(2.2rem, 6.4vw, 5rem);
 }
 
-/* v4 AUTO-FIX: /partner/ hero says "TRANSPORTATION CAPACITY FOR YOUR
-   BUSINESS" — 14 uppercase stretched letters overflow at the default size.
-   The partner page already carries body.accent-emerald, so the fix applies
-   automatically with no HTML change. Remove this rule if the /partner/
-   headline is ever shortened (e.g. "Capacity for Your Business"). */
+/* /partner/ hero says "TRANSPORTATION CAPACITY FOR YOUR BUSINESS" —
+   14 uppercase stretched letters overflow at the default size. The partner
+   page carries body.accent-emerald, so the fix applies automatically.
+   Remove this rule if the /partner/ headline is ever shortened. */
 body.accent-emerald .hero h1 {
   font-size: clamp(2.2rem, 6.4vw, 5rem);
 }
@@ -203,7 +203,7 @@ section.alt { background: var(--charcoal); }
 .nav-links a.nav-item:hover { color: var(--white); }
 .nav-links a.nav-item[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
 
-/* v4 NAV ORDER — Ride · Drive · Partner · Vehicles · Standards.
+/* NAV ORDER — Ride · Drive · Partner · Vehicles · Standards.
    Reorders visually via flex `order`, no HTML edits required.
    The CTA button (.btn, also linking to /ride/) is pushed last.
    NOTE: this is a visual reorder only — DOM/tab order is unchanged.
@@ -214,6 +214,20 @@ section.alt { background: var(--charcoal); }
 .nav-links a.nav-item[href*="vehicle"]   { order: 4; }
 .nav-links a.nav-item[href*="standards"] { order: 5; }
 .nav-links .btn { order: 10; }
+
+/* v5 FIX — keep the CURRENT page's link in its fixed slot.
+   On its own page, that link's href often doesn't contain the page name
+   (e.g. "./" or "#"), so none of the rules above matched and it fell back
+   to order 0 — appearing FIRST. The page is identified by its body accent
+   class, so the active link can be pinned to its correct position: */
+body.accent-champagne .nav-links a.nav-item[aria-current="page"] { order: 1; } /* Ride */
+body.accent-blue      .nav-links a.nav-item[aria-current="page"] { order: 2; } /* Drive */
+body.accent-emerald   .nav-links a.nav-item[aria-current="page"] { order: 3; } /* Partner */
+body.accent-silver    .nav-links a.nav-item[aria-current="page"] { order: 4; } /* Vehicles */
+/* Standards has no accent class — but the desktop nav contains no Home or
+   Contact link, so on a no-accent page the only possible active nav link
+   is Standards. Safe to pin it: */
+body:not([class*="accent-"]) .nav-links a.nav-item[aria-current="page"] { order: 5; } /* Standards */
 
 @media (min-width: 960px) {
   .nav-links { display: flex; }
@@ -265,7 +279,7 @@ section.alt { background: var(--charcoal); }
 .mobile-menu a[aria-current="page"] { color: var(--accent); }
 .mobile-menu .btn { font-family: var(--font-body); margin-top: 12px; }
 
-/* v4 MOBILE MENU ORDER — same order as desktop nav; Home (if present)
+/* MOBILE MENU ORDER — same order as desktop nav; Home (if present)
    stays first (order 0), CTA button stays last. */
 .mobile-menu a[href*="ride"]:not(.btn)  { order: 1; }
 .mobile-menu a[href*="drive"]           { order: 2; }
@@ -274,6 +288,15 @@ section.alt { background: var(--charcoal); }
 .mobile-menu a[href*="standards"]       { order: 5; }
 .mobile-menu a[href*="contact"]         { order: 6; }
 .mobile-menu .btn                       { order: 10; }
+
+/* v5 FIX — same active-link pinning for the mobile menu. The Home link
+   is excluded via :not() guards on common home hrefs so it never moves. */
+body.accent-champagne .mobile-menu a[aria-current="page"]:not(.btn) { order: 1; }
+body.accent-blue      .mobile-menu a[aria-current="page"]:not(.btn) { order: 2; }
+body.accent-emerald   .mobile-menu a[aria-current="page"]:not(.btn) { order: 3; }
+body.accent-silver    .mobile-menu a[aria-current="page"]:not(.btn) { order: 4; }
+body:not([class*="accent-"]) .mobile-menu
+  a[aria-current="page"]:not(.btn):not([href="/"]):not([href="./"]):not([href="../"]):not([href$="index.html"]):not([href*="contact"]) { order: 5; }
 
 /* --------------------------------------------------------------------------
    6. HERO
@@ -585,7 +608,7 @@ section.alt { background: var(--charcoal); }
 .footer-links a { font-size: 13px; color: var(--silver); transition: color .2s var(--ease); }
 .footer-links a:hover { color: var(--white); }
 
-/* v4 FOOTER ORDER — Home stays first (order 0), then
+/* FOOTER ORDER — Home stays first (order 0), then
    Ride · Drive · Partner · Vehicles · Standards · Contact. */
 .footer-links a[href*="ride"]      { order: 1; }
 .footer-links a[href*="drive"]     { order: 2; }
@@ -593,6 +616,15 @@ section.alt { background: var(--charcoal); }
 .footer-links a[href*="vehicle"]   { order: 4; }
 .footer-links a[href*="standards"] { order: 5; }
 .footer-links a[href*="contact"]   { order: 6; }
+
+/* v5 FIX — pin the current page's footer link to its slot too.
+   Home is protected by :not() guards so it always stays first. */
+body.accent-champagne .footer-links a[aria-current="page"] { order: 1; }
+body.accent-blue      .footer-links a[aria-current="page"] { order: 2; }
+body.accent-emerald   .footer-links a[aria-current="page"] { order: 3; }
+body.accent-silver    .footer-links a[aria-current="page"] { order: 4; }
+body:not([class*="accent-"]) .footer-links
+  a[aria-current="page"]:not([href="/"]):not([href="./"]):not([href="../"]):not([href$="index.html"]):not([href*="contact"]) { order: 5; }
 
 .footer-heading { margin-bottom: 18px; display: block; }
 .footer-legal { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); display: grid; gap: 10px; }
