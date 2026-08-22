@@ -838,11 +838,14 @@ body.accent-blue .steps .step p {
   margin-right: auto;
 }
 
-/* Hero artwork: show the entire scene — moon and waves — uncropped */
+/* Hero: full-bleed edge to edge, minimal crop */
+.hero-media { inset: -6% 0; }
 .hero-media img {
-  object-fit: contain;
-  object-position: center center;
+  object-fit: cover;
+  object-position: center 62%;
 }
-.hero-media {
-  inset: 0;              /* no bleed needed when nothing is cropped */
-}
+
+/* Shorter heroes = crop window closer to the artwork's wide shape,
+   so moon and waves both stay in frame */
+.hero { min-height: 78vh; }
+.hero.compact { min-height: 62vh; }
