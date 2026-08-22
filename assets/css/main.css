@@ -837,3 +837,9 @@ body.accent-blue .steps .step p {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Hero artwork: anchor the crop lower in the frame so the moon
+   always stays fully inside the visible area on every page. */
+.hero-media img {
+  object-position: center 78%;
+}
