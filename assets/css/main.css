@@ -913,3 +913,8 @@ body.accent-blue .steps .step p {
   transform: translateY(18px);
   pointer-events: none;
 }
+
+/* hidden until JS reveals it */
+.call-fab { opacity: 0; transform: translateY(18px); pointer-events: none; }
+.call-fab.fab-ready { opacity: 1; transform: none; pointer-events: auto; }
+.call-fab.fab-ready.fab-hidden { opacity: 0; transform: translateY(18px); pointer-events: none; }
