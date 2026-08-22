@@ -840,3 +840,8 @@ body.accent-blue .steps .step p {
 
 .hero-media { inset: -12% 0; }
 .hero-media img { object-fit: cover; object-position: center center; }
+
+/* Centered icon steps — works on every page */
+.step-centered { text-align: center; }
+.step-centered .step-icon { margin-left: auto; margin-right: auto; }
+.step-centered p { margin-left: auto; margin-right: auto; }
