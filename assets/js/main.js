@@ -2,6 +2,7 @@
    PACIFIC BLACK TRANSPORT — main.js
    Nav · IntersectionObserver reveals · shared form module · prefill · tabs
    No libraries.
+   v2: mailto failure detection + "Open in Gmail" / "Copy message" fallback.
    ========================================================================== */
 (function () {
   "use strict";
@@ -9,6 +10,8 @@
   /* ------------------------------------------------------------------
      CONFIG — all form submissions open the visitor's email app via a
      pre-filled mailto: draft addressed to PBT. No backend, no keys.
+     If no mail app opens (common on desktop), a fallback panel offers
+     Gmail-in-browser compose and copy-to-clipboard.
   ------------------------------------------------------------------ */
   var PBT_EMAIL = "pacific.black.transport@gmail.com";
 
@@ -128,6 +131,9 @@
         · per-field inline errors + focus on first invalid field
         · a clean plain-text email built from all completed fields
         · a URL-encoded mailto: draft opened in the default mail app
+        · NEW: if no mail app opens within ~1.5s (tab never loses
+          visibility), an injected fallback panel offers "Open in
+          Gmail" (browser compose) and "Copy message".
         No fake "submitted" state: the visitor reviews and presses Send.
   ------------------------------------------------------------------ */
   function fieldWrap(input) { return input.closest(".field"); }
@@ -219,6 +225,142 @@
     if (status) { status.textContent = msg; status.classList.add("visible"); }
   }
 
+  /* ---- NEW: Gmail web-compose URL for the same draft ---------------- */
+  function buildGmailUrl(subject, body) {
+    return "https://mail.google.com/mail/?view=cm&fs=1" +
+      "&to=" + encodeURIComponent(PBT_EMAIL) +
+      "&su=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+  }
+
+  /* ---- NEW: fallback panel, injected once per form ------------------ */
+  function getFallbackPanel(form) {
+    var panel = form.querySelector(".email-fallback");
+    if (panel) return panel;
+
+    panel = document.createElement("div");
+    panel.className = "email-fallback";
+    panel.hidden = true;
+
+    var p = document.createElement("p");
+    p.className = "email-fallback-lead";
+    p.textContent = "No email app opened? Use one of these instead:";
+    panel.appendChild(p);
+
+    var actions = document.createElement("div");
+    actions.className = "email-fallback-actions";
+
+    var gmailLink = document.createElement("a");
+    gmailLink.className = "btn btn-solid js-gmail";
+    gmailLink.target = "_blank";
+    gmailLink.rel = "noopener";
+    gmailLink.textContent = "Open in Gmail";
+    actions.appendChild(gmailLink);
+
+    var copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.className = "btn btn-outline js-copy";
+    copyBtn.textContent = "Copy message";
+    actions.appendChild(copyBtn);
+
+    panel.appendChild(actions);
+
+    var small = document.createElement("p");
+    small.className = "email-fallback-small";
+    small.textContent = "Or email us directly at " + PBT_EMAIL;
+    panel.appendChild(small);
+
+    /* Insert right after the form's status line (or at the end of the form) */
+    var status = form.querySelector(".form-status");
+    if (status && status.parentNode) {
+      status.parentNode.insertBefore(panel, status.nextSibling);
+    } else {
+      form.appendChild(panel);
+    }
+    return panel;
+  }
+
+  function showEmailFallback(form, subject, body) {
+    var panel = getFallbackPanel(form);
+    panel.querySelector(".js-gmail").href = buildGmailUrl(subject, body);
+
+    var copyBtn = panel.querySelector(".js-copy");
+    copyBtn.onclick = function () {
+      var text = "To: " + PBT_EMAIL + "\nSubject: " + subject + "\n\n" + body;
+      function done() {
+        copyBtn.textContent = "Copied";
+        window.setTimeout(function () { copyBtn.textContent = "Copy message"; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done); });
+      } else {
+        fallbackCopy(text, done);
+      }
+    };
+
+    panel.hidden = false;
+    setStatus(form,
+      "It looks like no email app is set up on this device. " +
+      "Use \u201COpen in Gmail\u201D below, or copy the message and send it from any email account.");
+    panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+
+  /* Legacy copy path for older browsers / non-clipboard contexts */
+  function fallbackCopy(text, done) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (err) { /* no-op */ }
+    document.body.removeChild(ta);
+    done();
+  }
+
+  /* ---- NEW: open mailto and detect whether anything handled it ------ */
+  function openEmailDraft(form, subject, body) {
+    var mailto = "mailto:" + PBT_EMAIL +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+
+    var handled = false;
+    function markHandled() {
+      if (document.visibilityState === "hidden" || !document.hasFocus()) {
+        handled = true;
+        cleanup();
+      }
+    }
+    function cleanup() {
+      document.removeEventListener("visibilitychange", markHandled);
+      window.removeEventListener("blur", markHandled);
+    }
+    document.addEventListener("visibilitychange", markHandled);
+    window.addEventListener("blur", markHandled);
+
+    /* Open the mailto: URL via a synthetic anchor click — on phones this
+       opens the default Mail app; on desktop, the configured client.
+       The page itself stays put. */
+    var a = document.createElement("a");
+    a.href = mailto;
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    /* If the tab never lost focus/visibility, no mail app took the URL. */
+    window.setTimeout(function () {
+      cleanup();
+      if (!handled) {
+        showEmailFallback(form, subject, body);
+      } else {
+        setStatus(form,
+          "Your email app is opening. Please review and send your request. " +
+          "If nothing opened, email us directly at " + PBT_EMAIL + ".");
+      }
+    }, 1500);
+  }
+
   document.querySelectorAll("form[data-pbt-form]").forEach(function (form) {
     form.querySelectorAll("input, select, textarea").forEach(function (input) {
       input.addEventListener("blur", function () { validateInput(input); });
@@ -241,7 +383,6 @@
       });
 
       var btn = form.querySelector('button[type="submit"]');
-      var originalLabel = btn ? btn.textContent : "";
 
       if (firstInvalid) {
         setStatus(form, "Please complete the highlighted fields.");
@@ -252,26 +393,12 @@
 
       var subject = resolveSubject(form);
       var body = buildEmailBody(form, subject);
-      var mailto = "mailto:" + PBT_EMAIL +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
 
       if (btn) { btn.disabled = true; btn.textContent = "Preparing your email\u2026"; }
       setStatus(form, "Preparing your email\u2026");
 
       window.setTimeout(function () {
-        /* Open the mailto: URL via a synthetic anchor click — on phones this
-           opens the default Mail app; on desktop, the configured client.
-           The page itself stays put. */
-        var a = document.createElement("a");
-        a.href = mailto;
-        a.style.display = "none";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setStatus(form,
-          "Your email app is opening. Please review and send your request. " +
-          "If nothing opened, email us directly at " + PBT_EMAIL + ".");
+        openEmailDraft(form, subject, body);
         if (btn) {
           btn.textContent = "Open email again";
           btn.disabled = false;
