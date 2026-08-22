@@ -1,8 +1,11 @@
 /* ==========================================================================
    PACIFIC BLACK TRANSPORT — main.js
    Nav · IntersectionObserver reveals · shared form module · prefill · tabs
-   No libraries.
+   No libraries required (flatpickr optional, loaded via CDN on /ride/).
    v2: mailto failure detection + "Open in Gmail" / "Copy message" fallback.
+   v3: address autocomplete (Photon/OSM, free, no key) on pickup/destination
+       fields + flatpickr date/time pickers (auto-skips if CDN not loaded;
+       native pickers remain on mobile).
    ========================================================================== */
 (function () {
   "use strict";
@@ -97,8 +100,6 @@
 
   /* ------------------------------------------------------------------
      3. Reveal-on-scroll + signature accent-rule draw
-        (CSS only animates inside prefers-reduced-motion: no-preference,
-        so with reduced motion these classes are inert.)
   ------------------------------------------------------------------ */
   var observed = document.querySelectorAll(".reveal, .eyebrow");
   var headings = document.querySelectorAll("section h2");
@@ -126,15 +127,6 @@
 
   /* ------------------------------------------------------------------
      4. Shared form module — one mailto-based submission system.
-        Every <form data-pbt-form data-email-subject="…"> gets:
-        · reliable custom validation (forms are novalidate)
-        · per-field inline errors + focus on first invalid field
-        · a clean plain-text email built from all completed fields
-        · a URL-encoded mailto: draft opened in the default mail app
-        · NEW: if no mail app opens within ~1.5s (tab never loses
-          visibility), an injected fallback panel offers "Open in
-          Gmail" (browser compose) and "Copy message".
-        No fake "submitted" state: the visitor reviews and presses Send.
   ------------------------------------------------------------------ */
   function fieldWrap(input) { return input.closest(".field"); }
 
@@ -166,8 +158,6 @@
 
   function resolveSubject(form) {
     var subject = form.getAttribute("data-email-subject") || "PBT Website Inquiry";
-    /* A select marked data-subject-source can override the subject via the
-       chosen option's data-subject attribute (e.g. Corporate vs Partnership). */
     var src = form.querySelector("select[data-subject-source]");
     if (src) {
       var opt = src.options[src.selectedIndex];
@@ -225,7 +215,7 @@
     if (status) { status.textContent = msg; status.classList.add("visible"); }
   }
 
-  /* ---- NEW: Gmail web-compose URL for the same draft ---------------- */
+  /* ---- Gmail web-compose URL for the same draft ---------------------- */
   function buildGmailUrl(subject, body) {
     return "https://mail.google.com/mail/?view=cm&fs=1" +
       "&to=" + encodeURIComponent(PBT_EMAIL) +
@@ -233,7 +223,7 @@
       "&body=" + encodeURIComponent(body);
   }
 
-  /* ---- NEW: fallback panel, injected once per form ------------------ */
+  /* ---- fallback panel, injected once per form ------------------------ */
   function getFallbackPanel(form) {
     var panel = form.querySelector(".email-fallback");
     if (panel) return panel;
@@ -270,7 +260,6 @@
     small.textContent = "Or email us directly at " + PBT_EMAIL;
     panel.appendChild(small);
 
-    /* Insert right after the form's status line (or at the end of the form) */
     var status = form.querySelector(".form-status");
     if (status && status.parentNode) {
       status.parentNode.insertBefore(panel, status.nextSibling);
@@ -318,7 +307,7 @@
     done();
   }
 
-  /* ---- NEW: open mailto and detect whether anything handled it ------ */
+  /* ---- open mailto and detect whether anything handled it ------------ */
   function openEmailDraft(form, subject, body) {
     var mailto = "mailto:" + PBT_EMAIL +
       "?subject=" + encodeURIComponent(subject) +
@@ -338,9 +327,6 @@
     document.addEventListener("visibilitychange", markHandled);
     window.addEventListener("blur", markHandled);
 
-    /* Open the mailto: URL via a synthetic anchor click — on phones this
-       opens the default Mail app; on desktop, the configured client.
-       The page itself stays put. */
     var a = document.createElement("a");
     a.href = mailto;
     a.style.display = "none";
@@ -408,18 +394,209 @@
   });
 
   /* ------------------------------------------------------------------
-     5. Date input: min = today (ride form)
+     5. Date/time inputs
+        · If flatpickr is loaded (CDN on /ride/), it upgrades the pickers:
+          full dark calendar + scrollable time. flatpickr automatically
+          keeps NATIVE pickers on phones (better UX there).
+        · If flatpickr is NOT loaded, native inputs keep working and the
+          date min=today rule still applies.
   ------------------------------------------------------------------ */
-  document.querySelectorAll('input[type="date"][data-min-today]').forEach(function (input) {
+  var todayISO = (function () {
     var d = new Date();
-    var iso = d.getFullYear() + "-" +
+    return d.getFullYear() + "-" +
       String(d.getMonth() + 1).padStart(2, "0") + "-" +
       String(d.getDate()).padStart(2, "0");
-    input.min = iso;
+  })();
+
+  document.querySelectorAll('input[type="date"][data-min-today]').forEach(function (input) {
+    input.min = todayISO;
   });
 
+  if (window.flatpickr) {
+    document.querySelectorAll('form[data-pbt-form] input[type="date"]').forEach(function (el) {
+      window.flatpickr(el, {
+        minDate: el.hasAttribute("data-min-today") ? "today" : null,
+        altInput: true,          /* shows "Aug 23, 2026", submits "2026-08-23" */
+        altFormat: "M j, Y",
+        dateFormat: "Y-m-d"
+      });
+    });
+    document.querySelectorAll('form[data-pbt-form] input[type="time"]').forEach(function (el) {
+      window.flatpickr(el, {
+        enableTime: true,
+        noCalendar: true,
+        altInput: true,          /* shows "7:30 PM", submits "19:30" */
+        altFormat: "h:i K",
+        dateFormat: "H:i",
+        minuteIncrement: 5
+      });
+    });
+  }
+
   /* ------------------------------------------------------------------
-     6. Query-param prefill
+     6. Address autocomplete — pickup / destination fields.
+        Photon (photon.komoot.io): free OpenStreetMap geocoder, no API
+        key required, autocomplete permitted. Results biased toward LA.
+        Applies to any input whose name contains pickup / destination /
+        dropoff inside a PBT form. If the service is unreachable, the
+        field silently keeps working as a normal text input.
+  ------------------------------------------------------------------ */
+  (function initAddressAutocomplete() {
+    var addrInputs = document.querySelectorAll(
+      'form[data-pbt-form] input[name*="pickup"], ' +
+      'form[data-pbt-form] input[name*="destination"], ' +
+      'form[data-pbt-form] input[name*="dropoff"]'
+    );
+    if (!addrInputs.length || !window.fetch) return;
+
+    var LA_LAT = 34.0522, LA_LON = -118.2437;
+
+    function formatPlace(props) {
+      var main = props.name ||
+        [props.housenumber, props.street].filter(Boolean).join(" ") ||
+        props.street || props.city || "";
+      var subParts = [];
+      if (props.name && (props.housenumber || props.street)) {
+        subParts.push([props.housenumber, props.street].filter(Boolean).join(" "));
+      }
+      if (props.city && props.city !== main) subParts.push(props.city);
+      if (props.state) subParts.push(props.state);
+      return {
+        main: main,
+        sub: subParts.join(", "),
+        full: [main, subParts.join(", ")].filter(Boolean).join(", ")
+      };
+    }
+
+    addrInputs.forEach(function (input) {
+      var wrap = fieldWrap(input);
+      if (!wrap) return;
+
+      input.setAttribute("autocomplete", "off");
+      input.setAttribute("role", "combobox");
+      input.setAttribute("aria-expanded", "false");
+
+      var list = document.createElement("div");
+      list.className = "ac-list";
+      list.setAttribute("role", "listbox");
+      wrap.appendChild(list);
+
+      var items = [];
+      var activeIndex = -1;
+      var debounceTimer = null;
+      var controller = null;
+
+      function close() {
+        list.classList.remove("open");
+        list.innerHTML = "";
+        items = [];
+        activeIndex = -1;
+        input.setAttribute("aria-expanded", "false");
+      }
+
+      function select(i) {
+        if (!items[i]) return;
+        input.value = items[i].full;
+        close();
+        validateInput(input);
+      }
+
+      function highlight(i) {
+        items.forEach(function (it, idx) {
+          it.el.classList.toggle("active", idx === i);
+        });
+        activeIndex = i;
+        if (items[i]) items[i].el.scrollIntoView({ block: "nearest" });
+      }
+
+      function render(features) {
+        list.innerHTML = "";
+        items = [];
+        activeIndex = -1;
+        var seen = {};
+        features.forEach(function (f) {
+          var place = formatPlace(f.properties || {});
+          if (!place.full || seen[place.full]) return;
+          seen[place.full] = true;
+
+          var el = document.createElement("div");
+          el.className = "ac-item";
+          el.setAttribute("role", "option");
+
+          var mainEl = document.createElement("span");
+          mainEl.className = "ac-main";
+          mainEl.textContent = place.main;
+          el.appendChild(mainEl);
+
+          if (place.sub) {
+            var subEl = document.createElement("span");
+            subEl.className = "ac-sub";
+            subEl.textContent = place.sub;
+            el.appendChild(subEl);
+          }
+
+          var item = { el: el, full: place.full };
+
+          /* mousedown (not click) so it fires before the input's blur */
+          el.addEventListener("mousedown", function (e) {
+            e.preventDefault();
+            select(items.indexOf(item));
+          });
+
+          items.push(item);
+          list.appendChild(el);
+        });
+
+        if (items.length) {
+          list.classList.add("open");
+          input.setAttribute("aria-expanded", "true");
+        } else {
+          close();
+        }
+      }
+
+      function search(q) {
+        if (controller) controller.abort();
+        controller = ("AbortController" in window) ? new AbortController() : null;
+        var url = "https://photon.komoot.io/api/?q=" + encodeURIComponent(q) +
+          "&limit=6&lang=en&lat=" + LA_LAT + "&lon=" + LA_LON;
+        fetch(url, controller ? { signal: controller.signal } : undefined)
+          .then(function (r) { return r.json(); })
+          .then(function (data) { render((data && data.features) || []); })
+          .catch(function () { /* aborted or offline — field still works manually */ });
+      }
+
+      input.addEventListener("input", function () {
+        var q = input.value.trim();
+        window.clearTimeout(debounceTimer);
+        if (q.length < 3) { close(); return; }
+        debounceTimer = window.setTimeout(function () { search(q); }, 250);
+      });
+
+      input.addEventListener("keydown", function (e) {
+        if (!items.length) return;
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          highlight(Math.min(activeIndex + 1, items.length - 1));
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          highlight(Math.max(activeIndex - 1, 0));
+        } else if (e.key === "Enter") {
+          if (activeIndex > -1) { e.preventDefault(); select(activeIndex); }
+        } else if (e.key === "Escape") {
+          close();
+        }
+      });
+
+      input.addEventListener("blur", function () {
+        /* slight delay so a mousedown selection can complete first */
+        window.setTimeout(close, 150);
+      });
+    });
+  })();
+
+  /* ------------------------------------------------------------------
+     7. Query-param prefill
         /ride/?class=…   → preselect vehicle-class radio card
         /contact/?subject=… → preselect subject option
   ------------------------------------------------------------------ */
@@ -442,7 +619,7 @@
   }
 
   /* ------------------------------------------------------------------
-     7. Drive pathways: accessible tab pattern, deep-linkable
+     8. Drive pathways: accessible tab pattern, deep-linkable
         (#pbt-vehicle / #own-vehicle)
   ------------------------------------------------------------------ */
   var tabs = document.querySelectorAll(".tab-btn");
@@ -471,7 +648,7 @@
   }
 
   /* ------------------------------------------------------------------
-     8. Sticky mobile CTA on /ride/ and /drive/ — appears after 60% scroll
+     9. Sticky mobile CTA on /ride/ and /drive/ — appears after 60% scroll
   ------------------------------------------------------------------ */
   var sticky = document.querySelector(".sticky-cta");
   if (sticky) {
