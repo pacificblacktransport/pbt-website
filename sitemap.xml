@@ -1,11 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: replace SITE_URL with the live domain (recommend pacificblacktransport.com) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://SITE_URL/</loc></url>
-  <url><loc>https://SITE_URL/ride/</loc></url>
-  <url><loc>https://SITE_URL/vehicles/</loc></url>
-  <url><loc>https://SITE_URL/drive/</loc></url>
-  <url><loc>https://SITE_URL/partner/</loc></url>
-  <url><loc>https://SITE_URL/standards/</loc></url>
-  <url><loc>https://SITE_URL/contact/</loc></url>
+
+  <url>
+    <loc>https://pacificblacktransport.com/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://pacificblacktransport.com/ride/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://pacificblacktransport.com/drive/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://pacificblacktransport.com/partner/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://pacificblacktransport.com/vehicles/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://pacificblacktransport.com/standards/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://pacificblacktransport.com/contact/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>
