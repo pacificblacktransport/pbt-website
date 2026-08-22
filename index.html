@@ -361,14 +361,15 @@
 </a>
 
 <!-- SITE SCRIPT — required: reveals, mobile menu, forms, parallax -->
-<script src="assets/js/main.js" defer></script>
-
-<!-- Call button: hide while scrolling, return when it stops.
-     Self-contained so it can never break the main script. -->
 <script>
 (function () {
   var fab = document.querySelector(".call-fab");
   if (!fab) return;
+
+  /* Appear 10 seconds after load */
+  setTimeout(function () { fab.classList.add("fab-ready"); }, 10000);
+
+  /* Then hide while scrolling, return 600ms after it stops */
   var t = null;
   window.addEventListener("scroll", function () {
     fab.classList.add("fab-hidden");
