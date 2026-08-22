@@ -867,35 +867,50 @@ body.accent-blue .steps .step p {
 
 .call-fab {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 36px;
+  bottom: 36px;
   z-index: 95;
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 14px 20px;
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  background: var(--charcoal);
-  color: var(--white);
-  font-size: 12.5px;
+  gap: 10px;
+  padding: 16px 26px;
+  border-radius: 999px;                 /* full pill; use 12px for soft rectangle */
+  border: none;
+  background: #34C759;
+  color: #06210E;
+  font-size: 13px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: .14em;
-  box-shadow: 0 10px 30px rgba(0,0,0,.55);
-  /* hidden by default; JS adds .visible */
+  box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 0 rgba(52,199,89,.5);
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(16px);
   pointer-events: none;
-  transition: opacity .35s var(--ease), transform .35s var(--ease), border-color .2s var(--ease);
+  transition: opacity .35s var(--ease), transform .35s var(--ease), background .2s var(--ease);
 }
-.call-fab.visible {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
-.call-fab:hover { border-color: #34C759; }
+.call-fab.visible { opacity: 1; transform: none; pointer-events: auto; }
+.call-fab:hover { background: #2FB350; }
 
-/* sits above the sticky bar on ride/ and drive/ */
+.call-fab-icon {
+  width: 20px; height: 20px;
+  fill: currentColor;
+  flex: 0 0 auto;
+}
+
+/* soft outward pulse — reads as "reachable" */
+@media (prefers-reduced-motion: no-preference) {
+  .call-fab.visible { animation: fabPulse 2.6s ease-out infinite; }
+  @keyframes fabPulse {
+    0%   { box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 0 rgba(52,199,89,.5); }
+    70%  { box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 16px rgba(52,199,89,0); }
+    100% { box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 0 rgba(52,199,89,0); }
+  }
+}
+
 @media (max-width: 760px) {
-  .call-fab { bottom: calc(78px + env(safe-area-inset-bottom)); }
+  .call-fab {
+    right: 20px;
+    bottom: calc(92px + env(safe-area-inset-bottom));  /* clears the sticky bar */
+    padding: 15px 22px;
+  }
 }
