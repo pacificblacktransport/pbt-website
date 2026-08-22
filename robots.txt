@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: replace domain when custom domain is live
-Sitemap: https://SITE_URL/sitemap.xml
+Sitemap: https://pacificblacktransport.com/sitemap.xml
