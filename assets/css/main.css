@@ -719,3 +719,28 @@ body:not([class*="accent-"]) .footer-links
 body.accent-emerald .hero.compact {
   min-height: 86vh;
 }
+
+
+/* ---- Address autocomplete dropdown (Photon) ---- */
+.field { position: relative; }
+.ac-list {
+  display: none;
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 60;
+  background: var(--charcoal);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  max-height: 280px; overflow-y: auto;
+  box-shadow: 0 16px 40px rgba(0,0,0,.5);
+}
+.ac-list.open { display: block; }
+.ac-item { padding: 12px 14px; cursor: pointer; border-bottom: 1px solid var(--line); }
+.ac-item:last-child { border-bottom: 0; }
+.ac-item:hover, .ac-item.active { background: var(--graphite); }
+.ac-main { display: block; color: var(--white); font-size: 15px; }
+.ac-sub  { display: block; color: var(--silver); font-size: 12.5px; margin-top: 2px; }
+
+/* ---- flatpickr: match PBT tokens ---- */
+.flatpickr-calendar { background: var(--charcoal); border: 1px solid var(--line); box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+.flatpickr-day.selected, .flatpickr-day.selected:hover { background: var(--accent); border-color: var(--accent); color: var(--black); }
+.flatpickr-day.today { border-color: var(--accent); }
+.flatpickr-day:hover { background: var(--graphite); border-color: var(--graphite); }
