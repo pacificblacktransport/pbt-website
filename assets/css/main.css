@@ -865,6 +865,7 @@ body.accent-blue .steps .step p {
 .card-centered .card-icon { margin-left: auto; margin-right: auto; }
 .card-centered p { margin-left: auto; margin-right: auto; }
 
+/* ---- Floating call button ---- */
 .call-fab {
   position: fixed;
   right: 36px;
@@ -883,20 +884,32 @@ body.accent-blue .steps .step p {
   letter-spacing: .14em;
   box-shadow: 0 12px 34px rgba(0,0,0,.5);
   transition: opacity .35s ease, transform .35s ease, background .2s ease;
+
+  /* hidden until JS adds .fab-ready after 10s */
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
 }
 .call-fab-icon { width: 20px; height: 20px; fill: currentColor; }
 .call-fab:hover { background: #2FB350; }
 
-/* hidden state — JS toggles .fab-hidden while scrolling */
-.call-fab.fab-hidden {
+/* visible state */
+.call-fab.fab-ready {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* hidden again while scrolling — must come AFTER .fab-ready to win */
+.call-fab.fab-ready.fab-hidden {
   opacity: 0;
   transform: translateY(18px);
   pointer-events: none;
 }
 
-/* "online" pulse — a soft green ring expanding outward */
+/* "online" pulse */
 @media (prefers-reduced-motion: no-preference) {
-  .call-fab { animation: fabPulse 1.8s ease-out infinite; }
+  .call-fab.fab-ready { animation: fabPulse 1.8s ease-out infinite; }
   @keyframes fabPulse {
     0%   { box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 0 rgba(52,199,89,.7); }
     70%  { box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 0 30px rgba(52,199,89,0); }
@@ -904,17 +917,4 @@ body.accent-blue .steps .step p {
   }
 }
 
-@media (max-width: 760px) {
-  .call-fab { right: 20px; bottom: calc(92px + env(safe-area-inset-bottom)); }
-}
-
-.call-fab.fab-hidden {
-  opacity: 0;
-  transform: translateY(18px);
-  pointer-events: none;
-}
-
-/* hidden until JS reveals it */
-.call-fab { opacity: 0; transform: translateY(18px); pointer-events: none; }
-.call-fab.fab-ready { opacity: 1; transform: none; pointer-events: auto; }
-.call-fab.fab-ready.fab-hidden { opacity: 0; transform: translateY(18px); pointer-events: none; }
+@media
