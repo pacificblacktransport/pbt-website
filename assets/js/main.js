@@ -661,4 +661,21 @@
     onStickyScroll();
   }
 
+    /* ------------------------------------------------------------------
+     10. Floating call button
+         · appears 10s after load
+         · hides while scrolling, returns 600ms after scrolling stops
+  ------------------------------------------------------------------ */
+  var fab = document.querySelector(".call-fab");
+  if (fab) {
+    window.setTimeout(function () { fab.classList.add("fab-ready"); }, 10000);
+    var fabTimer = null;
+    window.addEventListener("scroll", function () {
+      fab.classList.add("fab-hidden");
+      window.clearTimeout(fabTimer);
+      fabTimer = window.setTimeout(function () {
+        fab.classList.remove("fab-hidden");
+      }, 600);
+    }, { passive: true });
+  }
 })();
