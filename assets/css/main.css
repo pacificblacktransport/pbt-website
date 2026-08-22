@@ -837,3 +837,6 @@ body.accent-blue .steps .step p {
   margin-left: auto;
   margin-right: auto;
 }
+
+.hero-media { inset: 0; }
+.ocean-canvas { display: block; width: 100%; height: 100%; }
