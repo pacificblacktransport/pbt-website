@@ -907,3 +907,9 @@ body.accent-blue .steps .step p {
 @media (max-width: 760px) {
   .call-fab { right: 20px; bottom: calc(92px + env(safe-area-inset-bottom)); }
 }
+
+.call-fab.fab-hidden {
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+}
