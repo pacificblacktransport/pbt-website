@@ -94,13 +94,15 @@
 
             <div class="field full">
               <label id="class-label">Vehicle class</label>
+              <!-- Order matches /vehicles/: First Class SUV → First Class → Executive SUV → Executive.
+                   Executive stays preselected (the class fulfilled by PBT's own fleet). -->
               <div class="radio-cards" role="radiogroup" aria-labelledby="class-label">
                 <div class="radio-card">
-                  <input type="radio" id="rc-exec" name="vehicle_class" value="Executive" checked>
-                  <label for="rc-exec">
-                    <img src="../assets/img/cars/car1.png" alt="" loading="lazy">
-                    <span class="rc-name">Executive</span>
-                    <span class="rc-model">BMW 5 Series or similar</span>
+                  <input type="radio" id="rc-fsuv" name="vehicle_class" value="First Class SUV">
+                  <label for="rc-fsuv">
+                    <img src="../assets/img/cars/car4.png" alt="" loading="lazy">
+                    <span class="rc-name">First Class SUV</span>
+                    <span class="rc-model">Cadillac Escalade or similar</span>
                   </label>
                 </div>
                 <div class="radio-card">
@@ -120,11 +122,11 @@
                   </label>
                 </div>
                 <div class="radio-card">
-                  <input type="radio" id="rc-fsuv" name="vehicle_class" value="First Class SUV">
-                  <label for="rc-fsuv">
-                    <img src="../assets/img/cars/car4.png" alt="" loading="lazy">
-                    <span class="rc-name">First Class SUV</span>
-                    <span class="rc-model">Cadillac Escalade or similar</span>
+                  <input type="radio" id="rc-exec" name="vehicle_class" value="Executive" checked>
+                  <label for="rc-exec">
+                    <img src="../assets/img/cars/car1.png" alt="" loading="lazy">
+                    <span class="rc-name">Executive</span>
+                    <span class="rc-model">BMW 5 Series or similar</span>
                   </label>
                 </div>
               </div>
