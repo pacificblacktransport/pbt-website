@@ -661,23 +661,4 @@
     onStickyScroll();
   }
 
-     /* ------------------------------------------------------------------
-     Floating call button: appears after the hero, hides while the
-     visitor is actively scrolling, returns ~700ms after they stop.
-  ------------------------------------------------------------------ */
-  var fab = document.querySelector(".call-fab");
-  if (fab) {
-    var fabTimer = null;
-    function fabUpdate() {
-      var pastHero = window.scrollY > window.innerHeight * 0.5;
-      if (!pastHero) { fab.classList.remove("visible"); return; }
-      fab.classList.remove("visible");          /* hide while scrolling */
-      window.clearTimeout(fabTimer);
-      fabTimer = window.setTimeout(function () {
-        fab.classList.add("visible");           /* return once settled */
-      }, 700);
-    }
-    window.addEventListener("scroll", fabUpdate, { passive: true });
-    fabUpdate();
-  }
 })();
