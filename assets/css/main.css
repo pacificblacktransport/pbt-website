@@ -759,3 +759,16 @@ body.accent-emerald .hero.compact {
 .radio-card { display: flex; }
 .radio-card label { display: flex; flex-direction: column; width: 100%; }
 .radio-card .rc-model { margin-top: auto; padding-top: 3px; }
+
+/* Tag-grid icons — thin line icons in the page accent */
+.tag-grid li { display: flex; align-items: center; gap: 14px; }
+.tag-icon {
+  flex: 0 0 auto;
+  width: 22px; height: 22px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .9;
+}
