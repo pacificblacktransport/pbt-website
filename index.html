@@ -360,16 +360,22 @@
   <span>Call</span>
 </a>
 
-<!-- SITE SCRIPT — required: reveals, mobile menu, forms, parallax -->
+<!-- =========================================================
+     SCRIPT 1 — SITE SCRIPT. REQUIRED. NEVER REMOVE THIS LINE.
+     Runs: scroll reveals, mobile menu, all forms, parallax, tabs.
+     If this line is missing, page content stays invisible.
+========================================================== -->
+<script src="assets/js/main.js" defer></script>
+
+<!-- =========================================================
+     SCRIPT 2 — call button only (appear after 10s, hide on scroll).
+     Self-contained: if it fails it cannot break Script 1.
+========================================================== -->
 <script>
 (function () {
   var fab = document.querySelector(".call-fab");
   if (!fab) return;
-
-  /* Appear 10 seconds after load */
   setTimeout(function () { fab.classList.add("fab-ready"); }, 10000);
-
-  /* Then hide while scrolling, return 600ms after it stops */
   var t = null;
   window.addEventListener("scroll", function () {
     fab.classList.add("fab-hidden");
